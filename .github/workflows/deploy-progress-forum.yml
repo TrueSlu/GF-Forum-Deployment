@@ -14,9 +14,14 @@ jobs:
       - run: pip3 install --upgrade pip awsebcli
 
       - name: Substitute placeholder environment variables with repository-configured values
-        run: sed -i.bak "s|secrets\.MONGO_URL|${{ secrets.MONGO_URL }}|" docker-compose.yml
+        run:
+          - sed -i.bak "s|secrets\.MONGO_URL|${{ secrets.MONGO_URL }}|" docker-compose.yml
+          - sed -i.bak "s|secrets\.SMTP_USER|${{ secrets.SMTP_USER }}|" docker-compose.yml
+          - sed -i.bak "s|secrets\.SMTP_PASSWORD|${{ secrets.SMTP_PASSWORD }}|" docker-compose.yml
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
 
       - name: Include the modified docker-compose.yml in the to-be-deployed changes
         run: |

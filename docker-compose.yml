@@ -1,8 +1,10 @@
 version: '3.9'
 services:
   application:
-    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:f06acd2f'
+    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:ef56b62b'
     ports:
       - "80:3000"
     environment:
       - "MONGO_URL=secrets.MONGO_URL"
+      - "SMTP_USER=secrets.SMTP_USER"
+      - "SMTP_PASSWORD=secrets.SMTP_PASSWORD"
