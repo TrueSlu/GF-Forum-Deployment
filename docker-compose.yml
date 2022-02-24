@@ -1,12 +1,10 @@
 version: '3.9'
 services:
   application:
-    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:b6b5959c'
+    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:3c36a570'
     ports:
       - "80:3000"
     environment:
       - "MONGO_URL=secrets.MONGO_URL"
       - "SMTP_USER=secrets.SMTP_USER"
       - "SMTP_PASSWORD=secrets.SMTP_PASSWORD"
-      - "CLOUDINARY_API_KEY=secrets.CLOUDINARY_API_KEY"
-      - "CLOUDINARY_API_SECRET=secrets.CLOUDINARY_API_SECRET"
