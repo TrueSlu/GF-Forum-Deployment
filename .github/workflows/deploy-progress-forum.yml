@@ -18,6 +18,8 @@ jobs:
           sed -i.bak "s|secrets\.MONGO_URL|${{ secrets.MONGO_URL }}|" docker-compose.yml
           sed -i.bak "s|secrets\.SMTP_USER|${{ secrets.SMTP_USER }}|" docker-compose.yml
           sed -i.bak "s|secrets\.SMTP_PASSWORD|${{ secrets.SMTP_PASSWORD }}|" docker-compose.yml
+          sed -i.bak "s|secrets\.CLOUDINARY_API_KEY|${{ secrets.CLOUDINARY_API_KEY }}|" docker-compose.yml
+          sed -i.bak "s|secrets\.CLOUDINARY_API_SECRET|${{ secrets.CLOUDINARY_API_SECRET }}|" docker-compose.yml
         env:
           MONGO_URL: ${{ secrets.MONGO_URL }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
