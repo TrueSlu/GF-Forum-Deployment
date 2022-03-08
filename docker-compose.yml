@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   application:
-    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:1b23f113'
+    image: '149613315390.dkr.ecr.us-west-2.amazonaws.com/progressforum:5e719765'
     ports:
       - "80:3000"
     environment:
