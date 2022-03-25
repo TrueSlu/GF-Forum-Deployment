@@ -8,3 +8,15 @@ services:
       - "MONGO_URL=secrets.MONGO_URL"
       - "SMTP_USER=secrets.SMTP_USER"
       - "SMTP_PASSWORD=secrets.SMTP_PASSWORD"
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    ports:
+      - "9100:9100"
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
