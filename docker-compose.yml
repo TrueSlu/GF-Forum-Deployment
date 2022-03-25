@@ -10,8 +10,6 @@ services:
       - "SMTP_PASSWORD=secrets.SMTP_PASSWORD"
   node_exporter:
     image: quay.io/prometheus/node-exporter:latest
-    ports:
-      - "9100:9100"
     container_name: node_exporter
     command:
       - '--path.rootfs=/host'
