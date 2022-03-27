@@ -1,5 +1,7 @@
 branch-defaults:
   master:
+    environment: production
+  development:
     environment: development
 global:
   application_name: progressforum

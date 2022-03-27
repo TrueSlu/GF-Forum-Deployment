@@ -1,7 +1,7 @@
 name: deploy-progress-forum
 on:
   push:
-    branches: [master]
+    branches: [master, development]
 jobs:
   deploy:
     runs-on: ubuntu-latest
