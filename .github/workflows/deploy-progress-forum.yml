@@ -7,12 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure environment variables for production
-        if: ${{ github.ref == 'refs/head/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           echo "MONGO_URL=${{ secrets.MONGO_URL_PROD }}" >> $GITHUB_ENV
           echo "Added production environment variable(s)"
       - name: Configure environment variables for development
-        if: ${{ github.ref == 'refs/head/development' }}
+        if: ${{ github.ref == 'refs/heads/development' }}
         run: |
           echo "MONGO_URL=${{ secrets.MONGO_URL_DEV }}" >> $GITHUB_ENV
           echo "Added development environment variable(s)"
