@@ -6,6 +6,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Configure environment variables for production
+        if: ${{ github.ref == 'refs/head/master' }}
+        run: |
+          echo "MONGO_URL=${{ secrets.MONGO_URL_PROD }}" >> $GITHUB_ENV
+          echo "Added production environment variable(s)"
+      - name: Configure environment variables for development
+        if: ${{ github.ref == 'refs/head/development' }}
+        run: |
+          echo "MONGO_URL=${{ secrets.MONGO_URL_DEV }}" >> $GITHUB_ENV
+          echo "Added development environment variable(s)"
+
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
@@ -15,13 +26,12 @@ jobs:
 
       - name: Substitute placeholder environment variables with repository-configured values
         run: |
-          sed -i.bak "s|secrets\.MONGO_URL|${{ secrets.MONGO_URL }}|" docker-compose.yml
+          sed -i.bak "s|secrets\.MONGO_URL|${{ env.MONGO_URL }}|" docker-compose.yml
           sed -i.bak "s|secrets\.SMTP_USER|${{ secrets.SMTP_USER }}|" docker-compose.yml
           sed -i.bak "s|secrets\.SMTP_PASSWORD|${{ secrets.SMTP_PASSWORD }}|" docker-compose.yml
           sed -i.bak "s|secrets\.CLOUDINARY_API_KEY|${{ secrets.CLOUDINARY_API_KEY }}|" docker-compose.yml
           sed -i.bak "s|secrets\.CLOUDINARY_API_SECRET|${{ secrets.CLOUDINARY_API_SECRET }}|" docker-compose.yml
         env:
-          MONGO_URL: ${{ secrets.MONGO_URL }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
 
@@ -31,9 +41,9 @@ jobs:
           git config --global user.email github_action@github.com
           git add docker-compose.yml
 
-      - name: Execute deployment
-        run: eb deploy --verbose --staged --timeout 20
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "us-west-2"
+      # - name: Execute deployment
+      #   run: eb deploy --verbose --staged --timeout 20
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     AWS_DEFAULT_REGION: "us-west-2"
