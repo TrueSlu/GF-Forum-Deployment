@@ -4,11 +4,11 @@ branch-defaults:
   development:
     environment: development
 global:
-  application_name: progressforum
+  application_name: GF-Forum
   branch: null
-  default_ec2_keyname: sismail-dev
+  # default_ec2_keyname: sismail-dev
   default_platform: Docker running on 64bit Amazon Linux 2
-  default_region: us-west-2
+  default_region: us-west-1
   include_git_submodules: true
   instance_profile: null
   platform_name: null
